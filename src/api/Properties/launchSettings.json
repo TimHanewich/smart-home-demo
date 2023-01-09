@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "smart_home_demo": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7001",
+      "launchBrowser": false
+    }
+  }
+}
