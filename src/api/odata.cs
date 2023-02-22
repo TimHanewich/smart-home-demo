@@ -30,23 +30,24 @@ namespace SmartHomeApi
 
             if (op.Operation == DataOperation.Create)
             {
-                string sqlcmd = op.ToSql();
+                string sqlcmd = op.ToSql(); //Creates the "INSERT INTO ..." SQL query
                 SqlConnection sqlcon = new SqlConnection("(SQL connection string here)");
                 sqlcon.Open();
                 SqlCommand cmd = new SqlCommand(sqlcmd, sqlcon);
 
-                //Execute
+                //Execute (upload)
                 await cmd.ExecuteNonQueryAsync();
 
-                //Wrap-up
+                //Close the connection
                 sqlcon.Close();
 
+                //Respond w/ 201 CREATED (success)
                 HttpResponseMessage resp = new HttpResponseMessage();
-                resp.StatusCode = HttpStatusCode.OK;
+                resp.StatusCode = HttpStatusCode.Created;
                 return resp;
             }
 
-            //Return bad request
+            //Return bad request if it was not a create operation
             HttpResponseMessage bresp = new HttpResponseMessage();
             bresp.StatusCode = HttpStatusCode.BadRequest;
             return bresp;
