@@ -25,12 +25,12 @@ namespace SmartHomeApi
         {
 
 
-            int[] locations = await DistinctLocationsAsync(60);
+            int[] locations = await DistinctLocationsAsync(60); //queries which locations have data within the last 60 minutes
             JArray ToReturn = new JArray();
             foreach (int location in locations)
             {
-                SingleValueReading svr_temp = await GetLatestSingleValueReadingAsync(location, 0);
-                SingleValueReading svr_humidity = await GetLatestSingleValueReadingAsync(location, 1);
+                SingleValueReading svr_temp = await GetLatestSingleValueReadingAsync(location, 0); //read temperature
+                SingleValueReading svr_humidity = await GetLatestSingleValueReadingAsync(location, 1); //read humidity
                 JObject jo = new JObject();
                 jo.Add("location", location);
                 if (svr_temp != null)
