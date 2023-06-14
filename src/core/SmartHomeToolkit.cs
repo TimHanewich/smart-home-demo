@@ -69,5 +69,22 @@ namespace SmartHomeCore
             return ToReturn;
         }
 
+        //Uploads (inserts) into SQL
+        public static async Task UploadSingleValueReading(SingleValueReading svr)
+        {
+            UpstreamHelper uh = new UpstreamHelper("SingleValueReading");
+            uh.Add("Id", svr.Id.ToString(), true);
+            uh.Add("CollectedAtUtc", SqlToolkit.ToSqlDateTimeString(svr.CollectedAtUtc), true);
+            uh.Add("Location", svr.Location.ToString());
+            uh.Add("Value", svr.Value.ToString());
+            uh.Add("ReadingType", svr.ReadingType.ToString());
+            string sql_cmd = uh.ToInsert(); //i.e.: insert into SingleValueReading (Id,CollectedAtUtc,Location,Value,ReadingType) values ('67f781ae-1190-4bf3-a225-edcc24686634','20230614 13:35:48.360',4,72.154236,0)
+            SqlConnection sqlcon = new SqlConnection(ConnectionStringProvider.SqlConnectionString);
+            sqlcon.Open();
+            SqlCommand sqlcmd = new SqlCommand(sql_cmd, sqlcon);
+            await sqlcmd.ExecuteNonQueryAsync();
+            sqlcon.Close();
+        }
+
     }
 }
