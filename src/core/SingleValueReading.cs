@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
-namespace SmartHomeApi
+namespace SmartHomeCore
 {
     public class SingleValueReading
     {
@@ -15,7 +15,7 @@ namespace SmartHomeApi
 
         public static SingleValueReading Deserialize(JObject jo)
         {
-            SingleValueReading ToReturn = JsonConvert.DeserializeObject<SingleValueReading>(jo.ToString());
+            SingleValueReading? ToReturn = JsonConvert.DeserializeObject<SingleValueReading>(jo.ToString());
             if (ToReturn != null)
             {
                 return ToReturn;

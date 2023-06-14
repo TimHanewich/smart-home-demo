@@ -1,6 +1,6 @@
 using System;
 
-namespace SmartHomeApi
+namespace SmartHomeCore
 {
     public class ConnectionStringProvider
     {
