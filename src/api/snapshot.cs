@@ -15,6 +15,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using TimHanewich.Sql;
+using SmartHomeCore;
 
 namespace SmartHomeApi
 {

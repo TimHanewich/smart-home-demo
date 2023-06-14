@@ -13,7 +13,8 @@ using System.Net.Http;
 using TimHanewich.OData;
 using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
 using System.Data.SqlClient;
-using TimHanewich.Sql; 
+using TimHanewich.Sql;
+using SmartHomeCore; 
 
 namespace SmartHomeApi
 {
