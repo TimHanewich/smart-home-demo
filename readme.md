@@ -15,3 +15,6 @@ You can download the Power Apps Canvas app that is demonstrated [here](https://g
 
 ## API Endpoints
 You can find a description of the API endpoints available in the provided code [here](endpoints.md).
+
+## Demonstrating
+If you are hoping to demonstrate this publicly, see the recommended steps to do so [here](./demo.md).
