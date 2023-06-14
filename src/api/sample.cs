@@ -21,6 +21,7 @@ namespace SmartHomeApi
 {
     public static class sample
     {
+        [FunctionName("sample")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req)
         {
             //Get the response body
