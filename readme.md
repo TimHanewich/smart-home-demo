@@ -1,9 +1,9 @@
 # Smart Home Demo
 As shown on Microsoft's Low-Code Revolution Show (click image for video):  
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/v0mPmCw5yl0/0.jpg)](https://www.youtube.com/watch?v=v0mPmCw5yl0)
+[![Low Code Revolution Show](https://img.youtube.com/vi/v0mPmCw5yl0/0.jpg)](https://www.youtube.com/watch?v=v0mPmCw5yl0)
 
 And in longer form (click image for video):  
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/BYmdi3mYHhM/0.jpg)](https://www.youtube.com/watch?v=BYmdi3mYHhM)
+[![Long Form Tutorial](https://img.youtube.com/vi/BYmdi3mYHhM/0.jpg)](https://www.youtube.com/watch?v=BYmdi3mYHhM)
   
 In this repository you will find:
 - [The C# code used to deploy the Azure Function (API) to serve for data ingestion and consumption](./src/api/)
