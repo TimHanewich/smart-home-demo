@@ -27,6 +27,17 @@ namespace SmartHomeApi
             //Get the response body
             StreamReader sr = new StreamReader(req.Body);
             string content = await sr.ReadToEndAsync();
+
+            //If content is empty
+            if (content == "" || content == "[]")
+            {
+                HttpResponseMessage failed = new HttpResponseMessage();
+                failed.StatusCode = HttpStatusCode.BadRequest;
+                failed.Content = new StringContent("You must provide a JSON object (not array)");
+                return failed;
+            }
+
+            //Parse
             JObject jo = JObject.Parse(content);
 
             //Locations property provided?
