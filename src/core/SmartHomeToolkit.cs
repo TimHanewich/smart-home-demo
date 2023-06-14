@@ -70,7 +70,7 @@ namespace SmartHomeCore
         }
 
         //Uploads (inserts) into SQL
-        public static async Task UploadSingleValueReading(SingleValueReading svr)
+        public static async Task UploadSingleValueReadingAsync(SingleValueReading svr)
         {
             UpstreamHelper uh = new UpstreamHelper("SingleValueReading");
             uh.Add("Id", svr.Id.ToString(), true);
@@ -84,6 +84,28 @@ namespace SmartHomeCore
             SqlCommand sqlcmd = new SqlCommand(sql_cmd, sqlcon);
             await sqlcmd.ExecuteNonQueryAsync();
             sqlcon.Close();
+        }
+
+        public static async Task<float> GetAverageAsync(int location, int reading_type, DateTime since_utc)
+        {
+            string cmd = "select avg(Value) as v from SingleValueReading where Location = " + location.ToString() + " and ReadingType = " + reading_type.ToString() + " and CollectedAtUtc > '" + SqlToolkit.ToSqlDateTimeString(since_utc) + "'";
+            JArray response = await ExecuteQueryAsync(cmd);
+            if (response.Count == 0)
+            {
+                throw new Exception("Unable to calculate average for location '" + location.ToString() + "', reading type '" + reading_type.ToString() + "', since '" + since_utc.ToString() + "'. No data returned.");
+            }
+            else
+            {
+                foreach (JObject jo in response)
+                {
+                    JProperty? prop_v = jo.Property("v");
+                    if (prop_v != null)
+                    {
+                        return Convert.ToSingle(prop_v.Value.ToString());
+                    }
+                }
+                throw new Exception("Unable to calculate average for location '" + location.ToString() + "', reading type '" + reading_type.ToString() + "', since '" + since_utc.ToString() + "'. Average value not found in response.");
+            }
         }
 
     }
