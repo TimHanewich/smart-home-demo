@@ -31,7 +31,7 @@ namespace SmartHomeApi
             if (op.Operation == DataOperation.Create)
             {
                 string sqlcmd = op.ToSql(); //Creates the "INSERT INTO ..." SQL query
-                SqlConnection sqlcon = new SqlConnection("(SQL connection string here)");
+                SqlConnection sqlcon = new SqlConnection(ConnectionStringProvider.SqlConnectionString);
                 sqlcon.Open();
                 SqlCommand cmd = new SqlCommand(sqlcmd, sqlcon);
 

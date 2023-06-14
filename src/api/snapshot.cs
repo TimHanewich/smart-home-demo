@@ -104,7 +104,7 @@ namespace SmartHomeApi
 
         public static async Task<JArray> ExecuteQueryAsync(string query)
         {
-            SqlConnection sqlcon = new SqlConnection("(SQL connection string here)");
+            SqlConnection sqlcon = new SqlConnection(ConnectionStringProvider.SqlConnectionString);
             sqlcon.Open();
             SqlCommand sqlcmd = new SqlCommand(query, sqlcon);
             SqlDataReader dr = await sqlcmd.ExecuteReaderAsync();
