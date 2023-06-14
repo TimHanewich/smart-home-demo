@@ -72,8 +72,8 @@ namespace SmartHomeApi
                     svrh.Value = SmartHomeToolkit.RandomFloat(44.0f, 59.0f);
 
                     //Upload both
-                    await SmartHomeToolkit.UploadSingleValueReading(svrt);
-                    await SmartHomeToolkit.UploadSingleValueReading(svrh);
+                    await SmartHomeToolkit.UploadSingleValueReadingAsync(svrt);
+                    await SmartHomeToolkit.UploadSingleValueReadingAsync(svrh);
                 }
 
                 //Return success
