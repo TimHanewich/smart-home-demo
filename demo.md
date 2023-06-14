@@ -12,3 +12,13 @@
     1. Deploy Azure Function code (if needed)
     2. Build custom connector to the `snapshot` and `summary` endpoints.
     3. Build canvas app to consume custom connector. You can find a link to download the latest version of the canvas app in the [main page](readme.md). When importing, you may have trouble because the custom connector that *it* was pointing to does not exist in your environment. Deny the import from connecting to the connector. Delete the placeholder connector it is pointing to and reconnect to your own (the one you build above in step 2).
+
+## Screenshots: Power Apps Canvas App
+![img](https://i.imgur.com/aNUkcK1.png)
+![img](https://i.imgur.com/oBsSGzP.png)
+![img](https://i.imgur.com/T2wjSZv.png)
+
+## Screenshots: Power Automate Flow
+![img](https://i.imgur.com/kjkA0wz.png)
+![img](https://i.imgur.com/vzZbCK4.png)
+![img](https://i.imgur.com/KMrc9q0.png)
