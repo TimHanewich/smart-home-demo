@@ -4,7 +4,7 @@ namespace SmartHomeApi
 {
     public class ConnectionStringProvider
     {
-        public string SqlConnectionString
+        public static string SqlConnectionString
         {
             get
             {
