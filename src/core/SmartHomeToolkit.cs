@@ -61,5 +61,13 @@ namespace SmartHomeCore
             return ja;
         }
 
+        public static float RandomFloat(float min, float max)
+        {
+            Random r = new Random();
+            float rValue = r.NextSingle();
+            float ToReturn = min + ((max - min) * rValue);
+            return ToReturn;
+        }
+
     }
 }
