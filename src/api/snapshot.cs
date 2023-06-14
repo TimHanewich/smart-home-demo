@@ -26,12 +26,12 @@ namespace SmartHomeApi
         {
 
 
-            int[] locations = await DistinctLocationsAsync(60); //queries which locations have data within the last 60 minutes
+            int[] locations = await SmartHomeToolkit.DistinctLocationsAsync(60); //queries which locations have data within the last 60 minutes
             JArray ToReturn = new JArray();
             foreach (int location in locations)
             {
-                SingleValueReading svr_temp = await GetLatestSingleValueReadingAsync(location, 0); //read temperature
-                SingleValueReading svr_humidity = await GetLatestSingleValueReadingAsync(location, 1); //read humidity
+                SingleValueReading svr_temp = await SmartHomeToolkit.GetLatestSingleValueReadingAsync(location, 0); //read temperature
+                SingleValueReading svr_humidity = await SmartHomeToolkit.GetLatestSingleValueReadingAsync(location, 1); //read humidity
                 JObject jo = new JObject();
                 jo.Add("location", location);
                 if (svr_temp != null)
@@ -63,58 +63,6 @@ namespace SmartHomeApi
             resp.Content = new StringContent(ToReturn.ToString(), Encoding.UTF8, "application/json");
             return resp;
         }  
-
-
-
-
-        public static async Task<int[]> DistinctLocationsAsync(int within_minutes)
-        {
-            string cmd = "select distinct Location from SingleValueReading where datediff(minute, CollectedAtUtc, getdate()) < " + within_minutes.ToString();
-            JArray q = await ExecuteQueryAsync(cmd);
-            List<int> ToReturn = new List<int>();
-            foreach (JObject jo in q)
-            {
-                JProperty prop = jo.Property("Location");
-                if (prop != null)
-                {
-                    int loc = Convert.ToInt32(prop.Value.ToString());
-                    ToReturn.Add(loc);
-                }
-            }
-            return ToReturn.ToArray();
-        }
-
-        public static async Task<SingleValueReading> GetLatestSingleValueReadingAsync(int location, int reading_type)
-        {
-            string cmd = "select top 1 * from SingleValueReading where Location = " + location.ToString() + " and ReadingType = " + reading_type.ToString() + "order by CollectedAtUtc desc";
-            JArray q = await ExecuteQueryAsync(cmd);
-            foreach (JObject jo in q)
-            {
-                try
-                {
-                    SingleValueReading ToReturn = SingleValueReading.Deserialize(jo);
-                    return ToReturn;
-                }
-                catch
-                {
-
-                }
-            }
-            return null;
-        }
-
-        public static async Task<JArray> ExecuteQueryAsync(string query)
-        {
-            SqlConnection sqlcon = new SqlConnection(ConnectionStringProvider.SqlConnectionString);
-            sqlcon.Open();
-            SqlCommand sqlcmd = new SqlCommand(query, sqlcon);
-            SqlDataReader dr = await sqlcmd.ExecuteReaderAsync();
-            string json = SqlToolkit.ReadSqlToJson(dr);
-            sqlcon.Close();
-            JArray ja = JArray.Parse(json);
-            return ja;
-        }
-
 
     }
 }

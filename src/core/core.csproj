@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="TimHanewich.OData" Version="0.1.1" />
   </ItemGroup>
 
 </Project>
