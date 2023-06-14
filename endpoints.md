@@ -56,7 +56,7 @@ Provides the average of temperature and humidity readings for the past number of
 
 ### Example Request
 ```
-GET summary?hours=12
+GET /summary?hours=12
 ```
 In the above example, the `hours` query parameter determines the number of hours worth of data you would like to get an average for. For example, setting this to 12 would mean you are requesting an average for both temperature and humidity for each location within the last 12 hours. If the `hours` query parameter is *not* provided, it will default to 24 hours.
 
